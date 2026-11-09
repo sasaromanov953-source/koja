@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marko Handmade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/*
+  Макет-черновик. ЗАМЕНИТЬ перед показом клиенту:
+  - фото в папке img/ (имена файлов указаны в каждом <img>)
+  - тексты, помеченные комментарием ЗАМЕНИТЬ
+*/
+:root{
+  --ink:#121D33;        /* ночной синий, основной фон */
+  --navy:#1B2C4A;       /* глубокий синий, поверхности */
+  --royal:#34557F;      /* «дорогой» синий, акценты на тёмном */
+  --cognac:#8F5430;     /* кожа, коньяк */
+  --tan:#C69560;        /* светлая кожа, мелкие акценты */
+  --bone:#EEE7DB;       /* слоновая кость, текст и карточки */
+  --bone-dim:#B9B2A6;
+  --serif-display:"Libre Caslon Display","Times New Roman",Times,serif;
+  --serif:"Libre Caslon Text","Times New Roman",Times,serif;
+  --gutter:clamp(16px,4vw,56px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--bone);font:400 17px/1.7 var(--serif);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--tan);outline-offset:3px}
+
+/* Фото-заглушка: кожа, пока не положены реальные снимки */
+.ph{position:relative;overflow:hidden;background:
+  radial-gradient(120% 90% at 30% 20%,#6b3f24 0%,#3d2414 55%,#24160d 100%)}
+.ph::after{content:attr(data-note);position:absolute;left:12px;bottom:10px;font:italic 13px/1.3 var(--serif);color:rgba(238,231,219,.55)}
+.ph img{width:100%;height:100%;object-fit:cover;position:relative;z-index:1}
+
+/* Навигация */
+.nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:18px var(--gutter);transition:background .3s}
+.nav.solid{background:rgba(18,29,51,.92);backdrop-filter:blur(8px)}
+.brand{font:400 22px/1 var(--serif-display);text-decoration:none;letter-spacing:.02em}
+.nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+.nav ul a{text-decoration:none;font-size:15px;color:var(--bone-dim)}
+.nav ul a:hover{color:var(--bone)}
+@media (max-width:640px){.nav ul{gap:16px}.nav ul li.hide-sm{display:none}}
+
+/* Заставка: фото закреплено, текст проявляется при прокрутке */
+.hero{height:230vh;position:relative}
+.hero-stage{position:sticky;top:0;height:100vh;overflow:hidden}
+.hero-stage .ph{position:absolute;inset:0}
+.hero-stage .ph img{transform:scale(calc(1.12 - var(--p,0)*.12))}
+.hero-shade{position:absolute;inset:0;z-index:2;
+  background:linear-gradient(180deg,rgba(18,29,51,.15) 0%,rgba(18,29,51,calc(.35 + var(--p,0)*.5)) 60%,var(--ink) 100%)}
+.hero-mark{position:absolute;z-index:3;left:var(--gutter);right:var(--gutter);bottom:clamp(28px,8vh,80px);
+  transform:translateY(calc(var(--p,0)*-34vh))}
+.hero-mark h1{margin:0;font:400 clamp(64px,15vw,220px)/.85 var(--serif-display);letter-spacing:-.02em}
+.hero-mark .sub{margin:14px 0 0;font:italic 400 clamp(18px,2vw,24px)/1.3 var(--serif);color:var(--bone-dim)}
+.hero-copy{max-width:34em;margin-top:28px;opacity:clamp(0,calc((var(--p,0) - .35)*2.5),1);
+  transform:translateY(calc((1 - clamp(0,calc((var(--p,0) - .35)*2.5),1))*24px))}
+.hero-copy p{margin:0 0 24px;font-size:clamp(17px,1.6vw,20px)}
+.btn{display:inline-block;padding:14px 28px;border:1px solid var(--tan);color:var(--bone);text-decoration:none;
+  font-size:16px;background:transparent;cursor:pointer;transition:background .2s,color .2s}
+.btn:hover{background:var(--tan);color:var(--ink)}
+.btn.fill{background:var(--cognac);border-color:var(--cognac)}
+.btn.fill:hover{background:var(--tan);border-color:var(--tan)}
+.btn + .btn{margin-left:12px}
+@media (prefers-reduced-motion:reduce){
+  .hero{height:auto}.hero-stage{position:relative}
+  .hero-mark{transform:none}.hero-copy{opacity:1;transform:none}
+  .hero-stage .ph img{transform:none}
+}
+
+/* Общие секции */
+section.block{padding:clamp(72px,12vw,140px) var(--gutter)}
+.head{max-width:1200px;margin:0 auto 48px;display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.head h2{margin:0;font:400 clamp(40px,6vw,76px)/1 var(--serif-display)}
+.head p{margin:0;max-width:30em;color:var(--bone-dim)}
+
+/* Магазин */
+.shop{background:var(--navy)}
+.tabs{max-width:1200px;margin:0 auto 40px;display:flex;flex-wrap:wrap;gap:8px 28px;border-bottom:1px solid rgba(238,231,219,.15)}
+.tabs button{all:unset;cursor:pointer;padding:10px 0 14px;font-size:17px;color:var(--bone-dim);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button[aria-pressed="true"]{color:var(--bone);border-color:var(--tan)}
+.tabs button:focus-visible{outline:2px solid var(--tan)}
+.grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:48px 28px}
+.item .ph{aspect-ratio:4/5}
+.item h3{margin:18px 0 4px;font:400 22px/1.25 var(--serif-display)}
+.item .cat{margin:12px 0 0;font:italic 14px var(--serif);color:var(--tan)}
+.item .desc{margin:8px 0 14px;font-size:15px;line-height:1.6;color:var(--bone-dim)}
+.item .order{font-size:15px;color:var(--bone);text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--tan)}
+.item[hidden]{display:none}
+
+/* Галерея */
+.gallery-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:clamp(120px,14vw,190px);grid-auto-flow:dense;gap:12px}
+.gallery-grid .ph:nth-child(1){grid-column:span 3;grid-row:span 3}
+.gallery-grid .ph:nth-child(2){grid-column:span 3;grid-row:span 2}
+.gallery-grid .ph:nth-child(3){grid-column:span 2;grid-row:span 2}
+.gallery-grid .ph:nth-child(4){grid-column:span 1;grid-row:span 1}
+.gallery-grid .ph:nth-child(5){grid-column:span 2;grid-row:span 2}
+.gallery-grid .ph:nth-child(6){grid-column:span 2;grid-row:span 2}
+.gallery-grid .ph:nth-child(7){grid-column:span 2;grid-row:span 2}
+@media (max-width:700px){
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-auto-rows:150px}
+  .gallery-grid .ph{grid-column:span 1 !important;grid-row:span 1 !important}
+  .gallery-grid .ph:nth-child(1){grid-column:span 2 !important;grid-row:span 2 !important}
+}
+
+/* Отзывы: кошелёк с карточками */
+.reviews{background:linear-gradient(180deg,var(--ink),#0f1a2e)}
+.wallet-wrap{max-width:640px;margin:0 auto;padding-top:220px}
+.wallet{position:relative;height:460px}
+.wallet-back{position:absolute;inset:0;border-radius:18px;
+  background:radial-gradient(140% 100% at 20% 0%,#7a4526,#4a2915 70%);box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.card{all:unset;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;position:absolute;left:28px;right:28px;height:300px;top:calc(24px + var(--i)*48px);
+  z-index:calc(1 + var(--i));cursor:pointer;padding:16px 24px;border-radius:10px;
+  background:var(--card,var(--bone));color:var(--ink);box-shadow:0 -2px 8px rgba(0,0,0,.25);
+  transition:transform .55s cubic-bezier(.2,.8,.2,1),box-shadow .3s}
+.card:nth-child(odd){--card:#E6DCCB}
+.card:hover{transform:translateY(-8px)}
+.card:focus-visible{outline:2px solid var(--tan);outline-offset:3px}
+.card .who{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font:400 18px/1.2 var(--serif-display)}
+.card .who span{font:italic 14px var(--serif);color:var(--royal)}
+.card blockquote{margin:22px 0 0;font:italic 400 19px/1.6 var(--serif)}
+.card.out{z-index:30;transform:translateY(calc(-1 * (24px + var(--i)*48px) - 190px));box-shadow:0 24px 50px rgba(0,0,0,.45)}
+.pocket{position:absolute;left:0;right:0;bottom:0;height:250px;z-index:20;border-radius:0 0 18px 18px;pointer-events:none;
+  background:radial-gradient(130% 120% at 50% 0%,#a0613a,#6b3a1f 75%);box-shadow:0 -6px 14px rgba(0,0,0,.35)}
+.pocket::before{content:"";position:absolute;inset:12px;border:2px dashed rgba(238,214,180,.45);border-radius:10px}
+.pocket .emb{position:absolute;left:0;right:0;bottom:44px;text-align:center;font:400 30px/1 var(--serif-display);
+  color:rgba(40,20,8,.55);text-shadow:0 1px 0 rgba(255,220,180,.25)}
+.wallet-hint{text-align:center;margin:24px 0 0;font:italic 15px var(--serif);color:var(--bone-dim)}
+@media (max-width:520px){
+  .wallet-wrap{padding-top:260px}.card{left:16px;right:16px;padding:14px 18px}.card blockquote{font-size:17px}
+}
+
+footer{padding:56px var(--gutter);border-top:1px solid rgba(238,231,219,.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;color:var(--bone-dim);font-size:15px}
+footer .brand{color:var(--bone)}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a class="brand" href="#top">Marko Handmade</a>
+  <ul>
+    <li><a href="#shop">Магазин</a></li>
+    <li><a href="#works">Работы</a></li>
+    <li class="hide-sm"><a href="#reviews">Отзывы</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-stage">
+    <!-- ЗАМЕНИТЬ: фото из 10-го поста (мужчина достаёт кошелёк) или фото с часами, чехлом и наушниками → img/hero.jpg -->
+    <div class="ph" data-note=""><img src="img/hero.jpg" alt="Кожаный кошелёк ручной работы в руке" onerror="this.remove()"></div>
+    <div class="hero-shade"></div>
+    <div class="hero-mark">
+      <h1>Marko</h1>
+      <p class="sub">Изделия из кожи ручной работы</p>
+      <div class="hero-copy">
+        <!-- ЗАМЕНИТЬ: текст из шапки профиля Instagram -->
+        <p>Кошельки, ремешки для часов, чехлы и блокноты. Каждую вещь мастер кроит и прошивает вручную, поэтому она служит годами и с возрастом становится только красивее.</p>
+        <a class="btn fill" href="#shop">Перейти в магазин</a><a class="btn" href="#works">Смотреть работы</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="block shop" id="shop">
+  <div class="head">
+    <h2>Магазин</h2>
+    <p>Небольшая партия изделий в наличии. Любое можно сделать под заказ: в другом цвете кожи, с другой нитью или с вашими инициалами.</p>
+  </div>
+  <div class="tabs" role="group" aria-label="Категории">
+    <button aria-pressed="true" data-f="all">Все</button>
+    <button aria-pressed="false" data-f="wallet">Кошельки</button>
+    <button aria-pressed="false" data-f="strap">Ремешки</button>
+    <button aria-pressed="false" data-f="case">Чехлы</button>
+    <button aria-pressed="false" data-f="note">Блокноты</button>
+  </div>
+  <!-- ЗАМЕНИТЬ: названия, описания и фото товаров из постов -->
+  <div class="grid" id="grid">
+    <article class="item" data-c="wallet"><div class="ph" data-note="фото товара"><img src="img/p1.jpg" alt="" onerror="this.remove()"></div><p class="cat">Кошельки</p><h3>Бумажник классический</h3><p class="desc">Растительного дубления, восемь отделений для карт, отдел для купюр.</p><a class="order" href="#">Узнать цену и заказать</a></article>
+    <article class="item" data-c="wallet"><div class="ph" data-note="фото товара"><img src="img/p2.jpg" alt="" onerror="this.remove()"></div><p class="cat">Кошельки</p><h3>Картхолдер</h3><p class="desc">Тонкий, на четыре карты. Помещается в нагрудный карман.</p><a class="order" href="#">Узнать цену и заказать</a></article>
+    <article class="item" data-c="strap"><div class="ph" data-note="фото товара"><img src="img/p3.jpg" alt="" onerror="this.remove()"></div><p class="cat">Ремешки</p><h3>Ремешок для часов</h3><p class="desc">Под любую ширину крепления, с ручной седельной строчкой.</p><a class="order" href="#">Узнать цену и заказать</a></article>
+    <article class="item" data-c="strap"><div class="ph" data-note="фото товара"><img src="img/p4.jpg" alt="" onerror="this.remove()"></div><p class="cat">Ремешки</p><h3>Ремешок для Apple Watch</h3><p class="desc">С адаптерами под ваш размер корпуса.</p><a class="order" href="#">Узнать цену и заказать</a></article>
+    <article class="item" data-c="case"><div class="ph" data-note="фото товара"><img src="img/p5.jpg" alt="" onerror="this.remove()"></div><p class="cat">Чехлы</p><h3>Чехол для наушников</h3><p class="desc">Плотная посадка, отверстие для зарядки, карабин по желанию.</p><a class="order" href="#">Узнать цену и заказать</a></article>
+    <article class="item" data-c="case"><div class="ph" data-note="фото товара"><img src="img/p6.jpg" alt="" onerror="this.remove()"></div><p class="cat">Чехлы</p><h3>Чехол для телефона</h3><p class="desc">Шьётся под конкретную модель телефона.</p><a class="order" href="#">Узнать цену и заказать</a></article>
+    <article class="item" data-c="note"><div class="ph" data-note="фото товара"><img src="img/p7.jpg" alt="" onerror="this.remove()"></div><p class="cat">Блокноты</p><h3>Кожаная обложка для блокнота</h3><p class="desc">Сменный блок формата A5, закладка-ляссе.</p><a class="order" href="#">Узнать цену и заказать</a></article>
+    <article class="item" data-c="note"><div class="ph" data-note="фото товара"><img src="img/p8.jpg" alt="" onerror="this.remove()"></div><p class="cat">Блокноты</p><h3>Трэвел-блокнот</h3><p class="desc">Для путешествий: кармашки для билетов и паспорта.</p><a class="order" href="#">Узнать цену и заказать</a></article>
+  </div>
+</section>
+
+<section class="block" id="works">
+  <div class="head">
+    <h2>Работы</h2>
+    <p>Изделия, которые уже уехали к владельцам.</p>
+  </div>
+  <!-- ЗАМЕНИТЬ: фото постов → img/g1.jpg … img/g7.jpg -->
+  <div class="gallery-grid">
+    <div class="ph" data-note="фото работы"><img src="img/g1.jpg" alt="" onerror="this.remove()"></div>
+    <div class="ph" data-note="фото работы"><img src="img/g2.jpg" alt="" onerror="this.remove()"></div>
+    <div class="ph" data-note="фото работы"><img src="img/g3.jpg" alt="" onerror="this.remove()"></div>
+    <div class="ph" data-note=""><img src="img/g4.jpg" alt="" onerror="this.remove()"></div>
+    <div class="ph" data-note="фото работы"><img src="img/g5.jpg" alt="" onerror="this.remove()"></div>
+    <div class="ph" data-note="фото работы"><img src="img/g6.jpg" alt="" onerror="this.remove()"></div>
+    <div class="ph" data-note="фото работы"><img src="img/g7.jpg" alt="" onerror="this.remove()"></div>
+  </div>
+</section>
+
+<section class="block reviews" id="reviews">
+  <div class="head">
+    <h2>Отзывы</h2>
+    <p>Что пишут те, кто уже носит наши вещи.</p>
+  </div>
+  <!-- ЗАМЕНИТЬ: образцы отзывов → реальные отзывы из комментариев / сторис -->
+  <div class="wallet-wrap">
+    <div class="wallet" id="wallet">
+      <div class="wallet-back"></div>
+      <button class="card out" style="--i:0" aria-expanded="true"><div class="who">Алексей <span>кошелёк</span></div><blockquote>Ношу каждый день почти год. Кожа потемнела и стала только красивее, строчка как в первый день.</blockquote></button>
+      <button class="card" style="--i:1" aria-expanded="false"><div class="who">Ирина <span>ремешок</span></div><blockquote>Заказывала мужу на годовщину с инициалами. Сделали за неделю, упаковка отдельный подарок.</blockquote></button>
+      <button class="card" style="--i:2" aria-expanded="false"><div class="who">Дмитрий <span>чехол</span></div><blockquote>Чехол для наушников сидит плотно, ничего не болтается. Видно, что сделано руками и с душой.</blockquote></button>
+      <button class="card" style="--i:3" aria-expanded="false"><div class="who">Мария <span>блокнот</span></div><blockquote>Обложка для ежедневника пахнет настоящей кожей. Уже заказала вторую в подарок подруге.</blockquote></button>
+      <div class="pocket"><div class="emb">Marko</div></div>
+    </div>
+    <p class="wallet-hint">Нажмите на карточку, чтобы достать отзыв</p>
+  </div>
+</section>
+
+<footer>
+  <span class="brand">Marko Handmade</span>
+  <!-- ЗАМЕНИТЬ: контакты из профиля -->
+  <a href="https://www.instagram.com/marko_handmade/">Instagram @marko_handmade</a>
+</footer>
+
+<script>
+const hero=document.querySelector('.hero'),stage=document.querySelector('.hero-stage'),nav=document.getElementById('nav');
+function onScroll(){
+  const r=hero.getBoundingClientRect(),max=hero.offsetHeight-innerHeight;
+  const p=Math.min(1,Math.max(0,-r.top/max));
+  stage.style.setProperty('--p',p.toFixed(3));
+  nav.classList.toggle('solid',scrollY>innerHeight*1.4);
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  const f=b.dataset.f;
+  document.querySelectorAll('#grid .item').forEach(i=>i.hidden=!(f==='all'||i.dataset.c===f));
+}));
+
+const cards=[...document.querySelectorAll('.card')];
+cards.forEach(c=>c.addEventListener('click',()=>{
+  cards.forEach(x=>{const on=x===c;x.classList.toggle('out',on);x.setAttribute('aria-expanded',on)});
+}));
+</script>
+</body>
+</html>
