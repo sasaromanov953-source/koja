@@ -6,12 +6,11 @@
 <title>Marko Handmade</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 /*
-  Макет-черновик. ЗАМЕНИТЬ перед показом клиенту:
-  - фото в папке img/ (имена файлов указаны в каждом <img>)
-  - тексты, помеченные комментарием ЗАМЕНИТЬ
+  Макет. Тексты взяты из Instagram @marko_handmade.
+  Фото положить в папку img/ (имена файлов указаны в каждом <img>).
 */
 :root{
   --ink:#121D33;        /* ночной синий, основной фон */
@@ -21,8 +20,8 @@
   --tan:#C69560;        /* светлая кожа, мелкие акценты */
   --bone:#EEE7DB;       /* слоновая кость, текст и карточки */
   --bone-dim:#B9B2A6;
-  --serif-display:"Libre Caslon Display","Times New Roman",Times,serif;
-  --serif:"Libre Caslon Text","Times New Roman",Times,serif;
+  --serif-display:"Prata","Times New Roman",Times,serif;
+  --serif:"PT Serif","Times New Roman",Times,serif;
   --gutter:clamp(16px,4vw,56px);
 }
 *{box-sizing:border-box}
@@ -56,8 +55,8 @@ a{color:inherit}
 .hero-shade{position:absolute;inset:0;z-index:2;
   background:linear-gradient(180deg,rgba(18,29,51,.15) 0%,rgba(18,29,51,calc(.35 + var(--p,0)*.5)) 60%,var(--ink) 100%)}
 .hero-mark{position:absolute;z-index:3;left:var(--gutter);right:var(--gutter);bottom:clamp(28px,8vh,80px);
-  transform:translateY(calc(var(--p,0)*-34vh))}
-.hero-mark h1{margin:0;font:400 clamp(64px,15vw,220px)/.85 var(--serif-display);letter-spacing:-.02em}
+  transform:translateY(calc(var(--p,0)*-26vh))}
+.hero-mark h1{margin:0;font:400 clamp(60px,12vw,180px)/.9 var(--serif-display);letter-spacing:-.02em}
 .hero-mark .sub{margin:14px 0 0;font:italic 400 clamp(18px,2vw,24px)/1.3 var(--serif);color:var(--bone-dim)}
 .hero-copy{max-width:34em;margin-top:28px;opacity:clamp(0,calc((var(--p,0) - .35)*2.5),1);
   transform:translateY(calc((1 - clamp(0,calc((var(--p,0) - .35)*2.5),1))*24px))}
@@ -90,7 +89,8 @@ section.block{padding:clamp(72px,12vw,140px) var(--gutter)}
 .item .ph{aspect-ratio:4/5}
 .item h3{margin:18px 0 4px;font:400 22px/1.25 var(--serif-display)}
 .item .cat{margin:12px 0 0;font:italic 14px var(--serif);color:var(--tan)}
-.item .desc{margin:8px 0 14px;font-size:15px;line-height:1.6;color:var(--bone-dim)}
+.item .price{margin:0 0 12px;font:400 20px/1.2 var(--serif-display);color:var(--tan)}
+.item .desc{margin:8px 0 10px;font-size:15px;line-height:1.6;color:var(--bone-dim)}
 .item .order{font-size:15px;color:var(--bone);text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--tan)}
 .item[hidden]{display:none}
 
@@ -112,7 +112,7 @@ section.block{padding:clamp(72px,12vw,140px) var(--gutter)}
 /* Отзывы: кошелёк с карточками */
 .reviews{background:linear-gradient(180deg,var(--ink),#0f1a2e)}
 .wallet-wrap{max-width:640px;margin:0 auto;padding-top:220px}
-.wallet{position:relative;height:460px}
+.wallet{position:relative;height:510px}
 .wallet-back{position:absolute;inset:0;border-radius:18px;
   background:radial-gradient(140% 100% at 20% 0%,#7a4526,#4a2915 70%);box-shadow:0 30px 60px rgba(0,0,0,.45)}
 .card{all:unset;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-start;text-align:left;position:absolute;left:28px;right:28px;height:300px;top:calc(24px + var(--i)*48px);
@@ -153,15 +153,14 @@ footer .brand{color:var(--bone)}
 
 <header class="hero" id="top">
   <div class="hero-stage">
-    <!-- ЗАМЕНИТЬ: фото из 10-го поста (мужчина достаёт кошелёк) или фото с часами, чехлом и наушниками → img/hero.jpg -->
-    <div class="ph" data-note=""><img src="img/hero.jpg" alt="Кожаный кошелёк ручной работы в руке" onerror="this.remove()"></div>
+    <!-- ФОТО: обложка 10-го поста (мужчина достаёт синий кошелёк) → img/hero.jpg; запасной вариант — 15-й пост (чехол, кейс, ремешок, часы) -->
+    <div class="ph" data-note=""><img src="img/hero.jpg" alt="Синий кожаный кошелёк Marko в руке" onerror="this.remove()"></div>
     <div class="hero-shade"></div>
     <div class="hero-mark">
       <h1>Marko</h1>
-      <p class="sub">Изделия из кожи ручной работы</p>
+      <p class="sub">Изделия из кожи ручной работы. Самара</p>
       <div class="hero-copy">
-        <!-- ЗАМЕНИТЬ: текст из шапки профиля Instagram -->
-        <p>Кошельки, ремешки для часов, чехлы и блокноты. Каждую вещь мастер кроит и прошивает вручную, поэтому она служит годами и с возрастом становится только красивее.</p>
+        <p>Превращаем кожу в вещи, которые носят годами: кошельки, ремешки и чехлы для техники Apple, блокноты. С 2018 года сшито больше 3000 изделий, средняя оценка 4,9 от 700+ клиентов. Доставляем по всей России.</p>
         <a class="btn fill" href="#shop">Перейти в магазин</a><a class="btn" href="#works">Смотреть работы</a>
       </div>
     </div>
@@ -171,7 +170,7 @@ footer .brand{color:var(--bone)}
 <section class="block shop" id="shop">
   <div class="head">
     <h2>Магазин</h2>
-    <p>Небольшая партия изделий в наличии. Любое можно сделать под заказ: в другом цвете кожи, с другой нитью или с вашими инициалами.</p>
+    <p>Каждое изделие шьётся вручную. Цвет кожи и нити можно выбрать, а заказ оформить в Telegram или в Директе Instagram.</p>
   </div>
   <div class="tabs" role="group" aria-label="Категории">
     <button aria-pressed="true" data-f="all">Все</button>
@@ -180,30 +179,33 @@ footer .brand{color:var(--bone)}
     <button aria-pressed="false" data-f="case">Чехлы</button>
     <button aria-pressed="false" data-f="note">Блокноты</button>
   </div>
-  <!-- ЗАМЕНИТЬ: названия, описания и фото товаров из постов -->
+  <!-- Цены из подписей к постам, часть — 2021 года: сверить с мастером -->
   <div class="grid" id="grid">
-    <article class="item" data-c="wallet"><div class="ph" data-note="фото товара"><img src="img/p1.jpg" alt="" onerror="this.remove()"></div><p class="cat">Кошельки</p><h3>Бумажник классический</h3><p class="desc">Растительного дубления, восемь отделений для карт, отдел для купюр.</p><a class="order" href="#">Узнать цену и заказать</a></article>
-    <article class="item" data-c="wallet"><div class="ph" data-note="фото товара"><img src="img/p2.jpg" alt="" onerror="this.remove()"></div><p class="cat">Кошельки</p><h3>Картхолдер</h3><p class="desc">Тонкий, на четыре карты. Помещается в нагрудный карман.</p><a class="order" href="#">Узнать цену и заказать</a></article>
-    <article class="item" data-c="strap"><div class="ph" data-note="фото товара"><img src="img/p3.jpg" alt="" onerror="this.remove()"></div><p class="cat">Ремешки</p><h3>Ремешок для часов</h3><p class="desc">Под любую ширину крепления, с ручной седельной строчкой.</p><a class="order" href="#">Узнать цену и заказать</a></article>
-    <article class="item" data-c="strap"><div class="ph" data-note="фото товара"><img src="img/p4.jpg" alt="" onerror="this.remove()"></div><p class="cat">Ремешки</p><h3>Ремешок для Apple Watch</h3><p class="desc">С адаптерами под ваш размер корпуса.</p><a class="order" href="#">Узнать цену и заказать</a></article>
-    <article class="item" data-c="case"><div class="ph" data-note="фото товара"><img src="img/p5.jpg" alt="" onerror="this.remove()"></div><p class="cat">Чехлы</p><h3>Чехол для наушников</h3><p class="desc">Плотная посадка, отверстие для зарядки, карабин по желанию.</p><a class="order" href="#">Узнать цену и заказать</a></article>
-    <article class="item" data-c="case"><div class="ph" data-note="фото товара"><img src="img/p6.jpg" alt="" onerror="this.remove()"></div><p class="cat">Чехлы</p><h3>Чехол для телефона</h3><p class="desc">Шьётся под конкретную модель телефона.</p><a class="order" href="#">Узнать цену и заказать</a></article>
-    <article class="item" data-c="note"><div class="ph" data-note="фото товара"><img src="img/p7.jpg" alt="" onerror="this.remove()"></div><p class="cat">Блокноты</p><h3>Кожаная обложка для блокнота</h3><p class="desc">Сменный блок формата A5, закладка-ляссе.</p><a class="order" href="#">Узнать цену и заказать</a></article>
-    <article class="item" data-c="note"><div class="ph" data-note="фото товара"><img src="img/p8.jpg" alt="" onerror="this.remove()"></div><p class="cat">Блокноты</p><h3>Трэвел-блокнот</h3><p class="desc">Для путешествий: кармашки для билетов и паспорта.</p><a class="order" href="#">Узнать цену и заказать</a></article>
+    <article class="item" data-c="wallet"><div class="ph" data-note="фото товара"><img src="img/p1.jpg" alt="Кошелёк из натуральной кожи" onerror="this.remove()"></div><p class="cat">Кошельки</p><h3>Кошелёк из натуральной кожи</h3><p class="desc">Новая модель из свежей коллекции.</p><p class="price">4 800 ₽</p><a class="order" href="https://t.me/markohandmadee">Заказать в Telegram</a></article>
+    <article class="item" data-c="wallet"><div class="ph" data-note="фото товара"><img src="img/p2.jpg" alt="Кард-холдер Pueblo" onerror="this.remove()"></div><p class="cat">Кошельки</p><h3>Кард-холдер Pueblo</h3><p class="desc">Кожа растительного дубления, цвет олива.</p><p class="price">2 500 ₽</p><a class="order" href="https://t.me/markohandmadee">Заказать в Telegram</a></article>
+    <article class="item" data-c="wallet"><div class="ph" data-note="фото товара"><img src="img/p3.jpg" alt="Кардхолдер Crazy Horse" onerror="this.remove()"></div><p class="cat">Кошельки</p><h3>Кардхолдер Crazy Horse</h3><p class="desc">До 8 карт, 10 цветов на выбор.</p><p class="price">1 290 ₽</p><a class="order" href="https://t.me/markohandmadee">Заказать в Telegram</a></article>
+    <article class="item" data-c="wallet"><div class="ph" data-note="фото товара"><img src="img/p4.jpg" alt="Обложка для автодокументов" onerror="this.remove()"></div><p class="cat">Кошельки</p><h3>Обложка для автодокументов</h3><p class="desc">Паспорт, права, СТС, страховка и до 8 карт.</p><p class="price">Цена по запросу</p><a class="order" href="https://t.me/markohandmadee">Заказать в Telegram</a></article>
+    <article class="item" data-c="strap"><div class="ph" data-note="фото товара"><img src="img/p5.jpg" alt="Ремешок для Apple Watch" onerror="this.remove()"></div><p class="cat">Ремешки</p><h3>Ремешок для Apple Watch</h3><p class="desc">Натуральная кожа Pueblo.</p><p class="price">3 550 ₽</p><a class="order" href="https://t.me/markohandmadee">Заказать в Telegram</a></article>
+    <article class="item" data-c="strap case"><div class="ph" data-note="фото товара"><img src="img/p6.jpg" alt="Набор в одном цвете" onerror="this.remove()"></div><p class="cat">Наборы</p><h3>Набор в одном цвете</h3><p class="desc">Ремешок Apple Watch, чехол iPhone и чехол AirPods. Больше 10 расцветок.</p><p class="price">9 990 ₽</p><a class="order" href="https://t.me/markohandmadee">Заказать в Telegram</a></article>
+    <article class="item" data-c="case"><div class="ph" data-note="фото товара"><img src="img/p7.jpg" alt="Чехол для AirPods Pro" onerror="this.remove()"></div><p class="cat">Чехлы</p><h3>Чехол для AirPods Pro</h3><p class="desc">Кожа премиум-класса, 8 цветов.</p><p class="price">3 580 ₽</p><a class="order" href="https://t.me/markohandmadee">Заказать в Telegram</a></article>
+    <article class="item" data-c="case"><div class="ph" data-note="фото товара"><img src="img/p8.jpg" alt="Чехол iPhone и кейс AirPods" onerror="this.remove()"></div><p class="cat">Чехлы</p><h3>Чехол iPhone и кейс AirPods</h3><p class="desc">Комплект из кожи Pueblo, у чехла защитный борт.</p><p class="price">Цена по запросу</p><a class="order" href="https://t.me/markohandmadee">Заказать в Telegram</a></article>
+    <article class="item" data-c="note"><div class="ph" data-note="фото товара"><img src="img/p9.jpg" alt="Блокнот на кольцах A5" onerror="this.remove()"></div><p class="cat">Блокноты</p><h3>Блокнот на кольцах A5</h3><p class="desc">Чистые листы или линия, клетка, точка, еженедельник.</p><p class="price">от 2 890 ₽</p><a class="order" href="https://t.me/markohandmadee">Заказать в Telegram</a></article>
+    <article class="item" data-c="note"><div class="ph" data-note="фото товара"><img src="img/p10.jpg" alt="Сшитый блокнот A5" onerror="this.remove()"></div><p class="cat">Блокноты</p><h3>Сшитый блокнот A5</h3><p class="desc">Ежедневник датированный или недатированный.</p><p class="price">от 3 500 ₽</p><a class="order" href="https://t.me/markohandmadee">Заказать в Telegram</a></article>
+    <article class="item" data-c="note"><div class="ph" data-note="фото товара"><img src="img/p11.jpg" alt="Ежедневник A4" onerror="this.remove()"></div><p class="cat">Блокноты</p><h3>Ежедневник A4</h3><p class="desc">Большой формат для работы и планирования.</p><p class="price">от 5 290 ₽</p><a class="order" href="https://t.me/markohandmadee">Заказать в Telegram</a></article>
   </div>
 </section>
 
 <section class="block" id="works">
   <div class="head">
     <h2>Работы</h2>
-    <p>Изделия, которые уже уехали к владельцам.</p>
+    <p>Изделия, которые уже уехали к владельцам. Больше работ в Instagram.</p>
   </div>
-  <!-- ЗАМЕНИТЬ: фото постов → img/g1.jpg … img/g7.jpg -->
+  <!-- ФОТО: обложки постов → img/g1.jpg … img/g7.jpg -->
   <div class="gallery-grid">
     <div class="ph" data-note="фото работы"><img src="img/g1.jpg" alt="" onerror="this.remove()"></div>
     <div class="ph" data-note="фото работы"><img src="img/g2.jpg" alt="" onerror="this.remove()"></div>
     <div class="ph" data-note="фото работы"><img src="img/g3.jpg" alt="" onerror="this.remove()"></div>
-    <div class="ph" data-note=""><img src="img/g4.jpg" alt="" onerror="this.remove()"></div>
+    <div class="ph" data-note="фото работы"><img src="img/g4.jpg" alt="" onerror="this.remove()"></div>
     <div class="ph" data-note="фото работы"><img src="img/g5.jpg" alt="" onerror="this.remove()"></div>
     <div class="ph" data-note="фото работы"><img src="img/g6.jpg" alt="" onerror="this.remove()"></div>
     <div class="ph" data-note="фото работы"><img src="img/g7.jpg" alt="" onerror="this.remove()"></div>
@@ -213,16 +215,16 @@ footer .brand{color:var(--bone)}
 <section class="block reviews" id="reviews">
   <div class="head">
     <h2>Отзывы</h2>
-    <p>Что пишут те, кто уже носит наши вещи.</p>
+    <p>Средняя оценка 4,9 от более чем 700 клиентов. Несколько сообщений, которые нам прислали.</p>
   </div>
-  <!-- ЗАМЕНИТЬ: образцы отзывов → реальные отзывы из комментариев / сторис -->
   <div class="wallet-wrap">
     <div class="wallet" id="wallet">
       <div class="wallet-back"></div>
-      <button class="card out" style="--i:0" aria-expanded="true"><div class="who">Алексей <span>кошелёк</span></div><blockquote>Ношу каждый день почти год. Кожа потемнела и стала только красивее, строчка как в первый день.</blockquote></button>
-      <button class="card" style="--i:1" aria-expanded="false"><div class="who">Ирина <span>ремешок</span></div><blockquote>Заказывала мужу на годовщину с инициалами. Сделали за неделю, упаковка отдельный подарок.</blockquote></button>
-      <button class="card" style="--i:2" aria-expanded="false"><div class="who">Дмитрий <span>чехол</span></div><blockquote>Чехол для наушников сидит плотно, ничего не болтается. Видно, что сделано руками и с душой.</blockquote></button>
-      <button class="card" style="--i:3" aria-expanded="false"><div class="who">Мария <span>блокнот</span></div><blockquote>Обложка для ежедневника пахнет настоящей кожей. Уже заказала вторую в подарок подруге.</blockquote></button>
+      <button class="card out" style="--i:0" aria-expanded="true"><div class="who">@misha.night <span>блокнот</span></div><blockquote>Блокнот пушка) Спасибо! Если понравится, закажу ещё коллегам.</blockquote></button>
+      <button class="card" style="--i:1" aria-expanded="false"><div class="who">@anastasiya.pavlovna <span>блокнот</span></div><blockquote>Получила блокнот — просто огонь!!! Синий цвет особенно хорош.</blockquote></button>
+      <button class="card" style="--i:2" aria-expanded="false"><div class="who">@ivanna.af <span>блокнот</span></div><blockquote>Потрясающий блокнот, выглядит шикарно.</blockquote></button>
+      <button class="card" style="--i:3" aria-expanded="false"><div class="who">@sidelnikovastasya <span>блокнот</span></div><blockquote>Получила, большое спасибо, очень классный!</blockquote></button>
+      <button class="card" style="--i:4" aria-expanded="false"><div class="who">@sv.erema <span>заказ</span></div><blockquote>Наконец получил, всё отлично, огромное спасибо!</blockquote></button>
       <div class="pocket"><div class="emb">Marko</div></div>
     </div>
     <p class="wallet-hint">Нажмите на карточку, чтобы достать отзыв</p>
@@ -231,7 +233,8 @@ footer .brand{color:var(--bone)}
 
 <footer>
   <span class="brand">Marko Handmade</span>
-  <!-- ЗАМЕНИТЬ: контакты из профиля -->
+  <span>Самара. Доставка по России</span>
+  <a href="https://t.me/markohandmadee">Telegram</a>
   <a href="https://www.instagram.com/marko_handmade/">Instagram @marko_handmade</a>
 </footer>
 
@@ -248,7 +251,7 @@ addEventListener('scroll',onScroll,{passive:true});onScroll();
 document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-pressed',x===b));
   const f=b.dataset.f;
-  document.querySelectorAll('#grid .item').forEach(i=>i.hidden=!(f==='all'||i.dataset.c===f));
+  document.querySelectorAll('#grid .item').forEach(i=>i.hidden=!(f==='all'||i.dataset.c.split(' ').includes(f)));
 }));
 
 const cards=[...document.querySelectorAll('.card')];
