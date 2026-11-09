@@ -67,6 +67,14 @@ a{color:inherit}
 .btn.fill{background:var(--cognac);border-color:var(--cognac)}
 .btn.fill:hover{background:var(--tan);border-color:var(--tan)}
 .btn + .btn{margin-left:12px}
+@media (min-aspect-ratio:1/1){
+  .hero-stage .ph{left:auto;width:min(58vh*1.0,52vw);width:calc(100vh*766/1366);max-width:55vw;background:var(--ink)}
+  .hero-stage .ph img{object-position:center}
+  .hero-stage .ph::before{content:"";position:absolute;inset:0;z-index:2;
+    background:linear-gradient(90deg,var(--ink) 0%,rgba(18,29,51,0) 28%)}
+  .hero-shade{background:linear-gradient(180deg,rgba(18,29,51,0) 0%,rgba(18,29,51,calc(var(--p,0)*.55)) 60%,var(--ink) 100%)}
+  .hero-mark{right:auto;max-width:calc(100vw - 100vh*766/1366 + 60px)}
+}
 @media (prefers-reduced-motion:reduce){
   .hero{height:auto}.hero-stage{position:relative}
   .hero-mark{transform:none}.hero-copy{opacity:1;transform:none}
@@ -154,7 +162,7 @@ footer .brand{color:var(--bone)}
 <header class="hero" id="top">
   <div class="hero-stage">
     <!-- ФОТО: обложка 10-го поста (мужчина достаёт синий кошелёк) → img/hero.jpg; запасной вариант — 15-й пост (чехол, кейс, ремешок, часы) -->
-    <div class="ph" data-note=""><img src="img/hero.jpg" alt="Синий кожаный кошелёк Marko в руке" onerror="this.remove()"></div>
+    <div class="ph" data-note=""><img src="img/hero.jpg" alt="Чехол iPhone, кейс AirPods и ремешок Apple Watch из кожи на деревянной доске" onerror="this.remove()"></div>
     <div class="hero-shade"></div>
     <div class="hero-mark">
       <h1>Marko</h1>
